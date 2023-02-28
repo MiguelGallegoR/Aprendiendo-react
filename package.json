@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/MiguelGallegoR/Aprendiendo-react/issues"
   },
-  "homepage": "https://github.com/MiguelGallegoR/Aprendiendo-react#readme"
+  "homepage": "https://github.com/MiguelGallegoR/Aprendiendo-react#readme",
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
 }
