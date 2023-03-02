@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/MiguelGallegoR/Aprendiendo-react#readme",
   "devDependencies": {
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "standard": "^17.0.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
   }
 }
