@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import './App.css'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
+import debounce from 'just-debounce-it'
 
-function useSearch () {
+function useSearch() {
   const [search, updateSearch] = useState('')
   const [error, setError] = useState(null)
   const isFirstInput = useRef(true)
@@ -33,13 +34,21 @@ function useSearch () {
   return { search, updateSearch, error }
 }
 
-export default function App() {
-  const { movies } = useMovies()
+export default function App () {
+  const [sort, setSort] = useState(false)
   const { search, updateSearch, error } = useSearch()
+  const { movies, getMovies, loading } = useMovies({ search, sort })
+
+  const debouncedGetMovies = useCallback(
+    debounce(search => {
+      getMovies({ search })
+    }, 300)
+    , [getMovies]
+  )
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log({ search })
+    getMovies({ search })
   }
   /*
       forma no controlada
@@ -49,17 +58,23 @@ export default function App() {
     )
     console.log(query)
 
-    */
+  */
+
+  const handleSort = () => {
+    setSort(!sort)
+  }
 
   // forma controlada
   const handleChange = (event) => {
-    updateSearch(event.target.value)
+    const newSearch = event.target.value
+    updateSearch(newSearch)
+    debouncedGetMovies(newSearch)
   }
 
   return (
     <div className='page'>
       <header>
-        <h1>Prueba Técnica</h1>
+        <h1>Buscador de Películas</h1>
 
         <form className='form' onSubmit={handleSubmit}>
           <input
@@ -68,12 +83,16 @@ export default function App() {
               borderColor: error ? 'red' : 'transparent'
             }} onChange={handleChange} value={search} name='search' placeholder='Avengers, Star wars...'
           />
+          <input type='checkbox' onChange={handleSort} checked={sort} />
           <button type='submit'>Buscar</button>
         </form>
       </header>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <main>
-        <Movies movies={movies} />
+        {
+          loading ? <p>Cargando...</p> : <Movies movies={movies} />
+        }
+
       </main>
     </div>
   )
