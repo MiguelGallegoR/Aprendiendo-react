@@ -11,11 +11,11 @@ export const FILTERS_BUTTONS = {
         href: `/?filter=${TODO_FILTERS.ALL}`
     },
      [TODO_FILTERS.ACTIVE]: {
-        literal: 'Todos',
+        literal: 'Activos',
         href: `/?filter=${TODO_FILTERS.ACTIVE}`
     },
      [TODO_FILTERS.COMPLETED]: {
-        literal: 'Todos',
+        literal: 'Completados',
         href: `/?filter=${TODO_FILTERS.COMPLETED}`
     }
 } as const
