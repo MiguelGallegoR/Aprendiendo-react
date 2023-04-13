@@ -7,7 +7,7 @@
 ## ⌨️ Proyectos
 
 - 01: [Twitter Follow Card](projects/01-twitter-follow-card/)
-- 02: [Tic Tac Toe](projects/02-tic-tac-toe/) -> https://tic-tac-toe-delta-six.vercel.app/
+- 02: [Tic Tac Toe](projects/02-tic-tac-toe/)
 - 03: [Mouse Follower](projects/03-mouse-follower)
 - 04: [Prueba técnica con Promesas, fetching y testing E2E](projects/04-react-prueba-tecnica)
 - 05: [Prueba técnica con formularios, buscador utilizando una API](projects/05-react-buscador-peliculas) -> https://film-searcher-five.vercel.app/
