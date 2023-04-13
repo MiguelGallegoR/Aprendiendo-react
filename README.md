@@ -13,3 +13,7 @@
 - 05: [Prueba técnica con formularios, buscador utilizando una API](projects/05-react-buscador-peliculas)
 - 06: [Creación de un ecommerce con carrito de compras](projects/06-shopping-cart)
 - 07: [Creación de un React Router desde cero](projects/07-midu-router)
+
+
+https://film-searcher-five.vercel.app/
+https://todo-list-umber-one.vercel.app/
