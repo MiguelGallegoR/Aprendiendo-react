@@ -6,22 +6,29 @@ const users = [
   {
     userName: 'midudev',
     name: 'Miguel Ángel Durán',
-    isFollowing: true
+    isFollowing: true,
+    avatar: 'midudev'
   },
   {
-    userName: 'MiguelGallego',
+    userName: 'miguelgallegorodriguez',
     name: 'Miguel Gallego Rodríguez',
-    isFollowing: true
+    isFollowing: true,
+    avatar: 'linkedin'
+
   },
   {
-    userName: 'pheralb',
-    name: 'Pablo H.',
-    isFollowing: false
+    userName: 'MiguelGallegoR',
+    name: 'MiguelGallegoR',
+    isFollowing: false,
+    avatar: 'github'
+
   },
   {
-    userName: 'TMChein',
-    name: 'Tomas',
-    isFollowing: false
+    userName: 'Eminem',
+    name: 'Marshall Mathers',
+    isFollowing: false,
+    avatar: 'Eminem'
+
   }
 ]
 
@@ -29,8 +36,8 @@ export function App () {
   return (
     <section className='App'>
       {
-        users.map(({ userName, name, isFollowing }) => (
-          <TwitterFollowCard key={userName} userName={userName} initialIsFollowing={isFollowing}>
+        users.map(({ userName, name, isFollowing, avatar }) => (
+          <TwitterFollowCard key={userName} userName={userName} initialIsFollowing={isFollowing} avatar={avatar}>
             {name}
           </TwitterFollowCard>
         ))
