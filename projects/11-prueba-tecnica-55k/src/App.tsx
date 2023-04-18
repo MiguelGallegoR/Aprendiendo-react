@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useMemo } from 'react'
 import { type User } from './types.d'
 import './App.css'
 import { UsersList } from './components/UsersList'
@@ -41,12 +41,27 @@ function App() {
       })
   }, [])
 
-  const sortedUsers = sortByCountry 
-    ? users.toSorted((a, b) => {
-      return a.location.country.localeCompare(b.location.country)
-    })
-    : users
+  const filteredUsers = useMemo(() => {
 
+    return typeof filterCountry  === 'string' && filterCountry.length > 0
+      ? users.filter(user => {
+        return user.location.country.toLowerCase().includes(filterCountry.toLowerCase())
+      })
+      : users
+
+  }, [users, filterCountry])
+    
+
+  const sortedUsers = useMemo(() => {
+    return sortByCountry 
+      ? filteredUsers.toSorted((a, b) => {
+        return a.location.country.localeCompare(b.location.country)
+      })
+      : filteredUsers
+
+  }, [filteredUsers, sortByCountry])
+  
+    
   return (
     <div className="App">
       <h1>Prueba Técnica</h1>
@@ -63,7 +78,7 @@ function App() {
           Resetear Usuarios 
         </button>
 
-        <input placeholder='FIltra por país' onChange={(e) => {
+        <input placeholder='Filtra por país' onChange={(e) => {
           setFilterCountry(e.target.value)
         }} />
       </header>
