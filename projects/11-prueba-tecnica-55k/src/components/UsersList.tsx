@@ -5,6 +5,10 @@ interface Props{
     users: User[]
 }
 export function UsersList ({ deleteUser, showColors ,users }:Props) {
+
+    const handleClickDelete = (email: string) => {
+        deleteUser(email);
+    };
     return(
         <table width='100%'>
             <thead>
@@ -35,7 +39,7 @@ export function UsersList ({ deleteUser, showColors ,users }:Props) {
                                     {user.location.country}
                                 </td>
                                 <td>
-                                    <button onClick={()=>{deleteUser(user.email)}}>
+                                    <button onClick={()=>{handleClickDelete(user.email)}}>
                                         Eliminar
                                     </button>
                                 </td>
