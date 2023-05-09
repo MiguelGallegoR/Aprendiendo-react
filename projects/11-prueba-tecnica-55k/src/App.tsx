@@ -1,8 +1,9 @@
 import { useState, useMemo } from 'react'
-import { type User } from './types.d'
 import './App.css'
 import { UsersList } from './components/UsersList'
 import { useUsers } from './hooks/useUsers'
+import { useMutation } from '@tanstack/react-query'
+import { queryClient } from './main'
 
 function App() {
   const {isLoading, isError, users, refetch, fetchNextPage, hasNextPage} = useUsers()
@@ -22,10 +23,23 @@ function App() {
     setSortByCountry(prevState => !prevState)
   }
 
-  const handleDelete = (email: string) => {
-      //const filteredUsers = users.filter(user => user.email !== email)
-      //setUsers(filteredUsers)
-  }
+  
+ 
+    const mutate = useMutation((email) => {
+        setData((prevData) => ({
+          ...prevData,
+          users: prevData.users.filter((user) => user.email !== email),
+        }));
+      }, {
+      onSuccess: () => {
+        queryClient.invalidateQueries('users');
+      },
+    });
+
+    const handleClick = (email: string) => {
+      mutate(email);
+    };
+  
 
   const handleReset = async() => {
       await refetch()
@@ -75,7 +89,7 @@ function App() {
       </header>
       <main>
         {users.length > 0  && 
-          <UsersList deleteUser={handleDelete} showColors={showColors} users={sortedUsers} />
+          <UsersList deleteUser={handleClick} showColors={showColors} users={sortedUsers} />
         }
         {isLoading && <strong>Cargando...</strong>}
         {isError && <p>Ha habido un error</p>}
